@@ -13,8 +13,8 @@ struct Root: Decodable {
     enum CodingKeys : String, CodingKey { case recipes = "recipes" }
 }
 
-struct Recipe: Decodable {
-    
+struct Recipe: Decodable, Identifiable {
+
     let cuisine: String
     let name: String
     let photo_url_large: String?
@@ -23,4 +23,7 @@ struct Recipe: Decodable {
     let source_url: String?
     let youtube_url: String?
 
+    var id: String? {
+        get { self.uuid }
+    }
 }
