@@ -16,10 +16,12 @@ struct RecipeDetailView: View {
             VStack(alignment: .leading) {
                 Divider()
                 
-                Text("\(recipe.cuisine) cuisine")
-                    .font(.subheadline)
+                if let cuisine = recipe.cuisine {
+                    Text("\(cuisine) cuisine")
+                        .font(.subheadline)
+                }
                 
-                CachedImage(uuid: recipe.uuid, url: URL(string: recipe.photo_url_large!))
+                CachedImage(uuid: recipe.uuid ?? "", url: URL(string: recipe.photo_url_large!))
                     .padding()
                 
                 Divider()
@@ -39,7 +41,7 @@ struct RecipeDetailView: View {
                 Spacer()
             }
             .padding()
-            .navigationTitle(recipe.name)
+            .navigationTitle(recipe.name ?? "No Name")
         }
     }
 }

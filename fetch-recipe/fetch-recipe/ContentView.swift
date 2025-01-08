@@ -10,24 +10,22 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
-//    @FetchRequest(
-//        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-//        animation: .default)
-//    private var items: FetchedResults<Item>
-    
     @State var viewmodel = ViewModel()
 
     var body: some View {
         NavigationView {
             List {
                 if viewmodel.state == .ready {
-                    ForEach(viewmodel.recipes) { item in
-                        NavigationLink {
-                            RecipeDetailView(recipe: item)
-                        } label: {
-                            Text("\(item.name)")
+                    if viewmodel.recipes.count > 0 {
+                        ForEach(viewmodel.recipes) { item in
+                            NavigationLink {
+                                RecipeDetailView(recipe: item)
+                            } label: {
+                                Text("\(item.name ?? "No Name")")
+                            }
                         }
+                    } else {
+                        Text("No recipes found, sorry :-(")
                     }
                 } else {
                     ProgressView()
@@ -37,7 +35,7 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem {
                     NavigationLink {
-                        SettingsView()
+                        SettingsView(vm: $viewmodel)
                     } label: {
                         Image(systemName: "gearshape")
                     }

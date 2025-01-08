@@ -12,6 +12,8 @@ class ImageCacheManager{
     
     static let instance = ImageCacheManager()
     
+    private(set) var numStored = 0
+    
     private init(){
         
     }
@@ -28,6 +30,7 @@ class ImageCacheManager{
     
     @discardableResult func add(image: UIImage, uuid: String) -> String {
         imageCache.setObject(image, forKey: uuid as NSString)
+        numStored += 1
         return "ADDED TO CACHE"
     }
     
@@ -40,6 +43,13 @@ class ImageCacheManager{
     
     @discardableResult func remove(uuid: String) -> String {
         imageCache.removeObject(forKey: uuid as NSString)
+        numStored -= 1
         return "REMOVE FROM CACHE"
+    }
+    
+    @discardableResult func removeAll() -> String {
+        imageCache.removeAllObjects()
+        numStored = 0
+        return "REMOVED ALL FROM CACHE"
     }
 }

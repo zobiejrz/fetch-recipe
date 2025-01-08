@@ -16,14 +16,17 @@ extension ContentView {
     class ViewModel {
         private(set) var recipes = [Recipe]()
         private(set) var state:ViewModelStates
+        var settings:Settings
         
         init() {
             self.recipes = []
             self.state = .ready
+            settings = Settings()
         }
         
         func loadRecipes() async {
-            let url = URL(string: "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json")!
+            
+            let url = URL(string: settings.currentEndpoint.rawValue)!
             
             if self.state == .ready {
                 self.state = .loading
@@ -38,5 +41,13 @@ extension ContentView {
             }
         }
         
+        func swapEndpoint(to newEndpoint:Settings.EndpointChoice) async {
+            self.settings.currentEndpoint = newEndpoint
+            await self.loadRecipes()
+        }
+        
+        func emptyCaches() {
+            ImageCacheManager.instance.removeAll()
+        }
     }
 }

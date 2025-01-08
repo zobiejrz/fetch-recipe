@@ -15,11 +15,11 @@ struct Root: Decodable {
 
 struct Recipe: Decodable, Identifiable {
 
-    let cuisine: String
-    let name: String
+    let cuisine: String?
+    let name: String?
     let photo_url_large: String?
     let photo_url_small: String?
-    let uuid: String
+    let uuid: String?
     let source_url: String?
     let youtube_url: String?
 
