@@ -12,35 +12,35 @@ struct RecipeDetailView: View {
     let recipe: Recipe
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Divider()
-            
-            Text("\(recipe.cuisine) cuisine")
-                .font(.subheadline)
-            
-            Image(systemName: "photo")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .padding()
-
-            Divider()
-            
-            if let source_url = recipe.source_url {
-                Link(destination: URL(string: source_url)!) {
-                    Text("Source URL ") + Text(Image(systemName: "link"))
+        ScrollView {
+            VStack(alignment: .leading) {
+                Divider()
+                
+                Text("\(recipe.cuisine) cuisine")
+                    .font(.subheadline)
+                
+                CachedImage(uuid: recipe.uuid, url: URL(string: recipe.photo_url_large!))
+                    .padding()
+                
+                Divider()
+                
+                if let source_url = recipe.source_url {
+                    Link(destination: URL(string: source_url)!) {
+                        Text("Source URL ") + Text(Image(systemName: "link"))
+                    }
                 }
-            }
-            
-            if let youtube_url = recipe.youtube_url {
-                Link(destination: URL(string: youtube_url)!) {
-                    Text("YouTube URL ") + Text(Image(systemName: "link"))
+                
+                if let youtube_url = recipe.youtube_url {
+                    Link(destination: URL(string: youtube_url)!) {
+                        Text("YouTube URL ") + Text(Image(systemName: "link"))
+                    }
                 }
+                
+                Spacer()
             }
-            
-            Spacer()
+            .padding()
+            .navigationTitle(recipe.name)
         }
-        .padding()
-        .navigationTitle(recipe.name)
     }
 }
 
