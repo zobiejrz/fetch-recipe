@@ -1,28 +1,14 @@
-<style>
-
-.h-section {
-  display: flex;
-  flex-direction: vertical;
-}
-
-img {
-  width: 30%;
-  height: auto;
-}
-
-</style>
-
 # fetch-recipe
 
 ## Approach & Decision Making Process
 
 ### Summary: Include screen shots or a video of your app highlighting its features
 
-<div class="h-section">
+<div style="display: flex;flex-direction: vertical;">
 
-![ContentView](./img/ContentView.png)
-![RecipeDetailView](./img/RecipeDetailView.png)
-![SettingsView](./img/SettingsView.png)
+<img src="./img/ContentView.png" style="width: 30%;height: auto;"/>
+<img src="./img/RecipeDetailView.png" style="width: 30%;height: auto;"/>
+<img src="./img/SettingsView.png" style="width: 30%;height: auto;"/>
 
 </div>
 
