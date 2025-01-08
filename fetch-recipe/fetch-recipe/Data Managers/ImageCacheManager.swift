@@ -28,21 +28,21 @@ class ImageCacheManager{
         return cache
     }()
     
-    @discardableResult func add(image: UIImage, uuid: String) -> String {
-        imageCache.setObject(image, forKey: uuid as NSString)
+    @discardableResult func add(image: UIImage, key: String) -> String {
+        imageCache.setObject(image, forKey: key as NSString)
         numStored += 1
         return "ADDED TO CACHE"
     }
     
-    func get(uuid: String) -> UIImage? {
-        guard let image = imageCache.object(forKey: uuid as NSString) else {
+    func get(key: String) -> UIImage? {
+        guard let image = imageCache.object(forKey: key as NSString) else {
             return nil
         }
         return image
     }
     
-    @discardableResult func remove(uuid: String) -> String {
-        imageCache.removeObject(forKey: uuid as NSString)
+    @discardableResult func remove(key: String) -> String {
+        imageCache.removeObject(forKey: key as NSString)
         numStored -= 1
         return "REMOVE FROM CACHE"
     }

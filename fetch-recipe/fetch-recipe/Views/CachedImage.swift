@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct CachedImage: View {
-    let uuid: String
+    let key: String
     let url: URL?
     
     var body: some View {
-        if let img = ImageCacheManager.instance.get(uuid: uuid) {
+        if let img = ImageCacheManager.instance.get(key: key) {
             Image(uiImage: img)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -24,7 +24,7 @@ struct CachedImage: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .onAppear {
-                            let _  = ImageCacheManager.instance.add(image: ImageRenderer(content: image).uiImage!, uuid: uuid)
+                            ImageCacheManager.instance.add(image: ImageRenderer(content: image).uiImage!, key: key)
                         }
                 } else if phase.error != nil {
                     Image(systemName: "xmark.octagon")

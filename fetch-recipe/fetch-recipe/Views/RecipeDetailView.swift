@@ -20,8 +20,8 @@ struct RecipeDetailView: View {
                     Text("\(cuisine) cuisine")
                         .font(.subheadline)
                 }
-                
-                CachedImage(uuid: recipe.uuid ?? "", url: URL(string: recipe.photo_url_large!))
+
+                CachedImage(key: "lrg-\(recipe.uuid!)", url: URL(string: recipe.photo_url_large!))
                     .padding()
                 
                 Divider()

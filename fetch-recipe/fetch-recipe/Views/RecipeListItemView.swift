@@ -9,20 +9,24 @@ import SwiftUI
 
 struct RecipeListItemView: View {
     
-    let recipeName: String?
+    let recipe: Recipe
     
     var body: some View {
         HStack {
+            CachedImage(key: "sml-\(recipe.uuid!)", url: URL(string: recipe.photo_url_small!))
+                .frame(width: 50.0)
+                .cornerRadius(15)
+
             Text(displayName)
                 .font(.title2)
+            
             Spacer()
-            Image(systemName: "note")
         }
         
     }
     
     private var displayName: String {
-        let str = recipeName ?? "Unnamed Recipe"
+        let str = recipe.name ?? "No Name"
         if str.count > 16 {
             return "\(str.prefix(13))..."
         }
@@ -32,11 +36,12 @@ struct RecipeListItemView: View {
 
 #Preview {
     List {
-        RecipeListItemView(recipeName: "Mediterranean Chopped Salad")
-        RecipeListItemView(recipeName: "Bakewell Tart")
-        RecipeListItemView(recipeName: "Turkey and Avacado Wrap")
-        RecipeListItemView(recipeName: nil)
-        RecipeListItemView(recipeName: "Cucumber Apple Salad")
+        
+        RecipeListItemView(recipe: Recipe(cuisine: nil, name: "Mediterranean Chopped Salad", photo_url_large: nil, photo_url_small: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/2cac06b3-002e-4df7-bb08-e15bbc7e552d/small.jpg", uuid: "1", source_url: nil, youtube_url: nil))
+        RecipeListItemView(recipe: Recipe(cuisine: nil, name: "Bakewell Tart", photo_url_large: nil, photo_url_small: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/2cac06b3-002e-4df7-bb08-e15bbc7e552d/small.jpg", uuid: "2", source_url: nil, youtube_url: nil))
+        RecipeListItemView(recipe: Recipe(cuisine: nil, name: "Turkey and Avacado Wrap", photo_url_large: nil, photo_url_small: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/2cac06b3-002e-4df7-bb08-e15bbc7e552d/small.jpg", uuid: "3", source_url: nil, youtube_url: nil))
+        RecipeListItemView(recipe: Recipe(cuisine: nil, name: nil, photo_url_large: nil, photo_url_small: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/2cac06b3-002e-4df7-bb08-e15bbc7e552d/small.jpg", uuid: "4", source_url: nil, youtube_url: nil))
+        RecipeListItemView(recipe: Recipe(cuisine: nil, name: "Cucumber Apple Salad", photo_url_large: nil, photo_url_small: "https://d3jbb8n5wk0qxi.cloudfront.net/photos/2cac06b3-002e-4df7-bb08-e15bbc7e552d/small.jpg", uuid: "5", source_url: nil, youtube_url: nil))
         
     }
 }

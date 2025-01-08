@@ -21,7 +21,7 @@ struct ContentView: View {
                             NavigationLink {
                                 RecipeDetailView(recipe: item)
                             } label: {
-                                Text("\(item.name ?? "No Name")")
+                                RecipeListItemView(recipe: item)
                             }
                         }
                     } else {
